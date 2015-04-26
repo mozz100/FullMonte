@@ -472,6 +472,7 @@ class FMLog:
     # Designated initializer
     def __init__(self,filein,suffix,append):
         # Create the log file at the input path
+        # HERE
         self.log = open(filein+"_"+append+"."+suffix, 'w' )
     
     # Write a message to the log
@@ -579,6 +580,7 @@ class WriteSummary:
 class makePDBformat:
     #Write a PDF file for viewing that contains the low energy conformations in ascending order of energy
     def __init__(self, filein, MolSpec, CSearch,append):
+        # HERE
         pdbfile = open(filein+"_"+append+".pdb", 'w' )
         if CSearch.NSAVED > 0:
             for i in range(0, CSearch.NSAVED):
@@ -596,6 +598,7 @@ class makePDBformat:
 class makeSDFformat:
     #Write a PDF file for viewing that contains the low energy conformations in ascending order of energy
     def __init__(self, filein, MolSpec, CSearch,append):
+        # HERE
         sdffile = open(filein+"_"+append+".sdf", 'w' )
         if CSearch.NSAVED > 0:
             for i in range(0, CSearch.NSAVED):
@@ -672,6 +675,7 @@ def main(filein, filetype, maxstep = None, levl = None, progress_callback = None
         PARAMS.LEVL = levl
 
     # Initialize the logfile for all text output #
+    # HERE
     if os.path.exists(filein+"_fm.dat"):
         var = raw_input("\no  Log file already exists! OK to overwrite this file ? (Y/N) ")
         if var.lower() == "y" or var.lower() == "": print "   Overwriting ..."
@@ -749,6 +753,7 @@ def main(filein, filetype, maxstep = None, levl = None, progress_callback = None
             if CSEARCH.ENERGY[i] - CSEARCH.GLOBMIN == 0.0: startgeom = i
 
         # Generate new geometries
+        # HERE
         CONFSPEC.NAME = filein+"_step_"+str(CSEARCH.STEP)
         
         for j in range(0, CSEARCH.NSAVED):
@@ -869,12 +874,14 @@ def main(filein, filetype, maxstep = None, levl = None, progress_callback = None
     #Summary of completed Full Monte search #######################
     CSEARCH.COMPLETE = 1
     WriteSummary(CSEARCH, PARAMS, start, log)
+    # HERE
     makeSDFformat(filein, MOLSPEC, CSEARCH, "fm")
     end = time.strftime("%H:%M:%S", time.localtime())
     asciiArt(end); log.Write(normaltermination); log.Finalize() 
 
 if __name__ == "__main__":
     # An input file must be specified - format must be MOL #
+    # HERE
     if len(sys.argv)>1: 
         filein = sys.argv[1].split(".")[0]
         if len(sys.argv[1].split(".mol"))>1: filetype = sys.argv[1].split(".")[1]
